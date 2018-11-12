@@ -7,9 +7,21 @@
       git.openstack.org:
         untrusted-projects:
           - openstack-infra/tripleo-ci
-#          - openstack/requirements
-#          - openstack/tripleo-quickstart
-#          - openstack/tripleo-quickstart-extras
+          - openstack/requirements
+          - openstack/tripleo-quickstart
+          - openstack/tripleo-quickstart-extras
+          - openstack/diskimage-builder
+          - openstack/heat-agents
+          - openstack/heat-templates
+          - openstack/instack-undercloud
+          - openstack/ironic
+          - openstack/ironic-python-agent
+          - openstack/python-tripleoclient
+          - openstack/tripleo-common
+          - openstack/tripleo-image-elements
+          - openstack/tripleo-puppet-elements
+          - openstack/requirements
+
       zuul-ci.org:
         untrusted-projects:
           - zuul-jobs:

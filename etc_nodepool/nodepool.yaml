@@ -12,5 +12,5 @@ providers:
         nodes:
           - name: node
             labels: centos-7
-            host-key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1ywYQgcUSMMClkoTaodNmtRUKeQFuKBNCT3u0z/dKHuTCRePbSOfBqBy44PdctAeolefunnngWyOAHHy05tlp9U3e7znWM3ib0UAUzcuNTYdc+xUctgQSO4MFtTFeQDQ0H9gSryHhVcNIJzHrGdOHLgP/IX5by2PGiKJbgkYBklebMhhM3qKnllTN93isXqApuBwNlIFc5MBhc6nOk9greaHA1sRL9qxq32Qm7brtSDq3MnfS2MzJuSMS0icrIeH7TKjlMKpGowVF7wq+XOks5cXFGi0WDeF0rhrFEpnhG2HvDdhT6HLGPxKTNBa6CwLM8PL50mmUe/Ne/8w2Hbqf"
+            host-key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFkvBo+NlO1eBml6ElYi/rnfdSN/L2gYWe31GVinNgOTSnSSZx/MwoeXaXkOSwx/bZmouzRvd+2m1Y6pLAsY/T41F/JOWHKV6F5Oa1pAfLs2SDau7aSzLWMobA1MtmlHy5MviBimcP9L9U63ahtuIYZMCUbbVQtyVBjlUEwoJXnBFw0RiBhQ9zyMDVUvH3mlsZjY+zO4aQjK8ygjjkrs+xNNzzHDhjRBqF+rVzieIhONnTw7CrgPXNj1umuv4r8e2TJVHN5JK3rSvI+2RiReJdZ+5qRYOuWJiWvX73SQ1ZV9LdfXL4PcarMkn4HPotrxfSw/P7N7uTCIXvSHwpA6V3"
             username: root
