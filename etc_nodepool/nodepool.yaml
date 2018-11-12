@@ -1,16 +1,226 @@
+---
 zookeeper-servers:
   - host: zk
 
+diskimages:
+  - name: dib-centos-7
+    formats:
+      - raw
+    username: zuul-worker
+    elements:
+      - centos-minimal
+      - nodepool-minimal
+      - zuul-worker-user
+      - rpm-factory
+      - ansible
+      - common-packages
+      - sf-ci-packages
+      - scl
+
+  - name: dib-fedora-27
+    formats:
+      - raw
+    username: zuul-worker
+    elements:
+      - fedora-minimal
+      - nodepool-minimal
+      - zuul-worker-user
+      - rpm-factory
+      - ansible
+      - common-packages
+      - fedora-packages
+      - gem-ansible-rake
+    env-vars:
+      DIB_RELEASE: '27'
+
+  - name: dib-dci-centos-7
+    formats:
+      - raw
+    username: zuul-worker
+    elements:
+      - centos-minimal
+      - nodepool-minimal
+      - zuul-worker-user
+      - common-packages
+      - epel-packages
+      - tox-pip
+      - rpm-factory
+      - ansible
+      - elasticsearch
+      - dci
+
+  # NOTE(pabelanger): rdoproject tenant
+  - name: rdo-centos-7
+    username: zuul
+    formats:
+      - raw
+    elements:
+      - centos-minimal
+      - nodepool-minimal-rdo
+      - simple-init
+      - zuul-worker-user-rdo
+      - rdo-base
+    env-vars:
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+
+  - name: rdo-fedora-28
+    username: zuul
+    formats:
+      - raw
+    elements:
+      - fedora-minimal
+      - nodepool-minimal-rdo
+      - simple-init
+      - zuul-worker-user-rdo
+      - rdo-base
+    env-vars:
+      DIB_RELEASE: '28'
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+
+  - name: rdo-fedora-stable
+    username: zuul
+    formats:
+      - raw
+    elements:
+      - fedora-minimal
+      - nodepool-minimal-rdo
+      - simple-init
+      - zuul-worker-user-rdo
+      - rdo-base
+      - rdo-fedora-stable
+    env-vars:
+      DIB_RELEASE: '28'
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_YUM_MINIMAL_BOOTSTRAP_REPOS: '/var/lib/nodepool/temp-fedora-stable-yum.repos.d'
+
+  - name: upstream-centos-7
+    username: zuul
+    formats:
+      - raw
+    elements:
+      - centos-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+      - epel
+    env-vars:
+      ELEMENTS_PATH: /etc/opt/rh/rh-python35/nodepool/elements:/usr/share/project-config/nodepool/elements
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_EPEL_DISABLED: '1'
+      ZUUL_USER_SSH_PUBLIC_KEY: /var/lib/nodepool/.ssh/zuul_rsa.pub
+
+extra-labels:
+  - provider: rdo-cloud
+    pool: main
+    cloud-images:
+      - name: sf-centos-7
+        image-name: sf-CentOS-7-x86_64-GenericCloud-1809
+        username: zuul-worker
+    labels:
+      - name: sf-centos-7
+        cloud-image: sf-centos-7
+        min-ram: 8000
 labels:
-  - name: centos-7
+  - name: dib-centos-7
+    min-ready: 3
+  - name: dib-fedora-27
+    min-ready: 1
+  - name: dib-dci-centos-7
+    min-ready: 1
+  - name: sf-centos-7
+
+  # NOTE(pabelanger): rdoproject tenant
+  - name: rdo-centos-7
+    min-ready: 1
+  - name: rdo-fedora-28
+    min-ready: 1
+  - name: rdo-fedora-stable
+
+  # NOTE(pabelanger): rdoproject tenant tripleo
+  - name: upstream-centos-7
+    min-ready: 1
+
+  # NOTE(pabelanger): rdo-cloud-tripleo tenant
+  - name: tripleo-ovb-centos-7
+    min-ready: 1
+  - name: tripleo-upstream-centos-7
+    min-ready: 1
 
 providers:
-  - name: static-vms
-    driver: static
+  - name: rdo-cloud
+    cloud: rdo-cloud
+    # NOTE(jpena): this is a workaround for infitite retries, see https://review.openstack.org/584488
+    launch-retries: 999999999
+    region-name: regionOne
+    clean-floating-ips: true
+    image-name-format: '{image_name}-{timestamp}'
+    boot-timeout: 240
+    rate: 0.25
+    diskimages:
+      - name: dib-centos-7
+        config-drive: true
+      - name: dib-dci-centos-7
+        config-drive: true
+      - name: dib-fedora-27
+        config-drive: true
+
+      # NOTE(pabelanger): rdoproject tenant
+      - name: rdo-centos-7
+        config-drive: true
+      - name: rdo-fedora-28
+        config-drive: true
+      - name: rdo-fedora-stable
+        config-drive: true
+
+      # NOTE(pabelanger): rdoproject tenant tripleo
+      - name: upstream-centos-7
+        config-drive: true
     pools:
       - name: main
-        nodes:
-          - name: node
-            labels: centos-7
-            host-key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFkvBo+NlO1eBml6ElYi/rnfdSN/L2gYWe31GVinNgOTSnSSZx/MwoeXaXkOSwx/bZmouzRvd+2m1Y6pLAsY/T41F/JOWHKV6F5Oa1pAfLs2SDau7aSzLWMobA1MtmlHy5MviBimcP9L9U63ahtuIYZMCUbbVQtyVBjlUEwoJXnBFw0RiBhQ9zyMDVUvH3mlsZjY+zO4aQjK8ygjjkrs+xNNzzHDhjRBqF+rVzieIhONnTw7CrgPXNj1umuv4r8e2TJVHN5JK3rSvI+2RiReJdZ+5qRYOuWJiWvX73SQ1ZV9LdfXL4PcarMkn4HPotrxfSw/P7N7uTCIXvSHwpA6V3"
-            username: root
+        max-servers: 25
+        labels:
+          - name: dib-centos-7
+            min-ram: 8000
+            flavor-name: rdo.m1.large
+            diskimage: dib-centos-7
+          - name: dib-fedora-27
+            min-ram: 8000
+            flavor-name: rdo.m1.large
+            diskimage: dib-fedora-27
+          - name: dib-dci-centos-7
+            min-ram: 8000
+            flavor-name: rdo.m1.large
+            diskimage: dib-dci-centos-7
+
+      # NOTE(pabelanger): rdoproject tenant
+      - name: rdoproject.org
+        max-servers: 30
+        labels:
+          - name: rdo-centos-7
+            min-ram: 8192
+            flavor-name: 'rdo.m1.nodepool'
+            diskimage: rdo-centos-7
+          - name: rdo-fedora-28
+            min-ram: 8192
+            flavor-name: 'rdo.m1.nodepool'
+            diskimage: rdo-fedora-28
+          - name: rdo-fedora-stable
+            min-ram: 8192
+            flavor-name: 'rdo.m1.nodepool'
+            diskimage: rdo-fedora-stable
+
+      # NOTE(pabelanger): rdoproject tenant tripleo
+      - name: rdoproject.org-tripleo
+        max-servers: 10
+        labels:
+          - name: upstream-centos-7
+            min-ram: 8192
+            flavor-name: 'ci.m1.nodepool'
+            diskimage: upstream-centos-7

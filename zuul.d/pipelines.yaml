@@ -5,11 +5,9 @@
     manager: independent
     trigger:
       qinqon:
-        event:
-          - ref-updated
+        event: ref-updated
       git.openstack.org:
-        event:
-          - ref-updated
+        event: ref-updated
     success:
       mysql:
     failure:
