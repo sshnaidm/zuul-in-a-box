@@ -9,6 +9,9 @@
           - openstack-infra/tripleo-ci
           - openstack/tripleo-quickstart
           - openstack/tripleo-quickstart-extras
+          - openstack/tripleo-upgrade
+          - openstack/browbeat
+          - openstack/tripleo-ha-utils
 
       zuul-ci.org:
         untrusted-projects:
