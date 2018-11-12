@@ -4,9 +4,9 @@
       qinqon:
         config-projects:
           - zuul-in-a-box
-#      git.openstack.org:
-#        untrusted-projects:
-#          - openstack-infra/tripleo-ci
+      git.openstack.org:
+        untrusted-projects:
+          - openstack-infra/tripleo-ci
 #          - openstack/requirements
 #          - openstack/tripleo-quickstart
 #          - openstack/tripleo-quickstart-extras
