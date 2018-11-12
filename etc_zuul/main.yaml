@@ -1,9 +1,15 @@
 - tenant:
     name: example-tenant
     source:
-      git.openstack.org:
+      qinqon:
         config-projects:
-          - openstack-infra/project-config
+          - zuul-in-a-box
+#      git.openstack.org:
+#        untrusted-projects:
+#          - openstack-infra/tripleo-ci
+#          - openstack/requirements
+#          - openstack/tripleo-quickstart
+#          - openstack/tripleo-quickstart-extras
       zuul-ci.org:
         untrusted-projects:
           - zuul-jobs:

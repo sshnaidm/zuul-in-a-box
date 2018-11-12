@@ -1,0 +1,13 @@
+- pipeline:
+    name: check
+    description: |
+      Check new commits at zuul
+    manager: independent
+    trigger:
+      git.openstack.org:
+        - event: ref-updated
+        - ref: refs/heads/master
+    success:
+      mysql:
+    failure:
+      mysql:
