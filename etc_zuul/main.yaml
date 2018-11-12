@@ -1,0 +1,11 @@
+- tenant:
+    name: example-tenant
+    source:
+      git.openstack.org:
+        config-projects:
+          - openstack-infra/project-config
+      zuul-ci.org:
+        untrusted-projects:
+          - zuul-jobs:
+              include:
+                - job

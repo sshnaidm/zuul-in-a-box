@@ -1,0 +1,16 @@
+zookeeper-servers:
+  - host: zk
+
+labels:
+  - name: centos-7
+
+providers:
+  - name: static-vms
+    driver: static
+    pools:
+      - name: main
+        nodes:
+          - name: node
+            labels: centos-7
+            host-key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1ywYQgcUSMMClkoTaodNmtRUKeQFuKBNCT3u0z/dKHuTCRePbSOfBqBy44PdctAeolefunnngWyOAHHy05tlp9U3e7znWM3ib0UAUzcuNTYdc+xUctgQSO4MFtTFeQDQ0H9gSryHhVcNIJzHrGdOHLgP/IX5by2PGiKJbgkYBklebMhhM3qKnllTN93isXqApuBwNlIFc5MBhc6nOk9greaHA1sRL9qxq32Qm7brtSDq3MnfS2MzJuSMS0icrIeH7TKjlMKpGowVF7wq+XOks5cXFGi0WDeF0rhrFEpnhG2HvDdhT6HLGPxKTNBa6CwLM8PL50mmUe/Ne/8w2Hbqf"
+            username: root
