@@ -5,11 +5,11 @@
     manager: independent
     trigger:
       qinqon:
-        event: ref-updated
-        ref: refs/heads/master
+        event:
+          - ref-updated
       git.openstack.org:
-        event: ref-updated
-        ref: refs/heads/master
+        event:
+          - ref-updated
     success:
       mysql:
     failure:
