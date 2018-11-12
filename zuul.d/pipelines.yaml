@@ -7,6 +7,10 @@
       qinqon:
         event: ref-updated
         ref: refs/heads/master
+    trigger:
+      git.openstack.org:
+        event: ref-updated
+        ref: refs/heads/master
     success:
       mysql:
     failure:

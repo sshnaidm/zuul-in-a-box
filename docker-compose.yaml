@@ -18,13 +18,14 @@ services:
       - mysql
     environment:
       no_proxy: "${no_proxy}"
-    command: "zuul-scheduler -d"
+    command: "sh -c 'ansible-playbook /var/playbooks/clone-required-projects.yaml; zuul-scheduler -d'"
     image: zuul/zuul-scheduler
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
       - "./playbooks/:/var/playbooks/:z"
       - "sshkey:/var/ssh:z"
       - /var/lib/zuul
+      - "projects:/projects/"
   web:
     command: "zuul-web -d"
     depends_on:
@@ -48,6 +49,7 @@ services:
       - "./playbooks/:/var/playbooks/:z"
       - "sshkey:/var/ssh:z"
       - "logs:/srv/static/logs:z"
+      - "projects:/projects/"
   node:
     build:
       dockerfile: node-Dockerfile
@@ -86,4 +88,6 @@ volumes:
   nodessh:
     external: true
   logs:
+    external: true
+  projects:
     external: true
