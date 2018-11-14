@@ -18,8 +18,8 @@ providers:
     cloud-images:
       - name: centos-7
         config-drive: true
-        image-name: CentOS-7-x86_64-GenericCloud-1804_02
-        username: centos
+        image-name: openstack-infra-centos-7
+        username: zuul
       - name: fedora-28
         config-drive: true
         image-name: Fedora-Cloud-Base-28-1.1.x86_64
@@ -33,6 +33,7 @@ providers:
             flavor-name: 'm1.large'
             cloud-image: centos-7
             console-log: true
+            key-name: quiquell
           - name: fedora-28
             min-ram: 8192
             flavor-name: 'm1.large'

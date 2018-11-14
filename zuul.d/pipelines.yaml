@@ -6,8 +6,6 @@
     trigger:
       qinqon:
         event: ref-updated
-      git.openstack.org:
-        event: ref-updated
     success:
       mysql:
     failure:

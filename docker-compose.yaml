@@ -23,7 +23,7 @@ services:
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
       - "./playbooks/:/var/playbooks/:z"
-      - "sshkey:/var/ssh:z"
+      - "~/.ssh/:/var/ssh/"
       - /var/lib/zuul
       - "./projects:/projects/"
   web:
@@ -47,9 +47,10 @@ services:
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
       - "./playbooks/:/var/playbooks/:z"
-      - "sshkey:/var/ssh:z"
+      - "~/.ssh/:/var/ssh"
       - "logs:/srv/static/logs:z"
       - "./projects:/projects/"
+
   launcher:
     command: "nodepool-launcher -d"
     depends_on:
@@ -60,6 +61,7 @@ services:
       - "~/.config/openstack/:/etc/openstack/"
     ports:
       - "8022:8022"
+
   logs:
     build:
       dockerfile: logs-Dockerfile
