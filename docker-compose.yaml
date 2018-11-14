@@ -3,6 +3,28 @@
 version: '2'
 
 services:
+  gerrit:
+    image: gerritcodereview/gerrit
+    ports:
+      - "8080:8080"
+      - "29418:29418"
+    command: |
+      /bin/sh -c '\
+        git config -f /var/gerrit/etc/gerrit.config gerrit.canonicalWebUrl http://localhost:8080/ && \
+        git config -f /var/gerrit/etc/gerrit.config gerrit.ui POLYGERRIT && \
+        git config -f /var/gerrit/etc/gerrit.config sendemail.enable false && \
+        git config -f /var/gerrit/etc/gerrit.config noteDb.changes.autoMigrate true && \
+        /var/gerrit/bin/gerrit.sh run'
+  gerritconfig:
+    image: zuul/zuul
+    environment:
+      no_proxy: "${no_proxy},gerrit"
+    depends_on:
+      - gerrit
+    volumes:
+      - "~/.ssh/:/var/ssh/"
+      - "./playbooks/:/var/playbooks/:z"
+    command: "ansible-playbook /var/playbooks/setup.yaml"
   zk:
     image: zookeeper
   mysql:
@@ -14,11 +36,12 @@ services:
       MYSQL_PASSWORD: secret
   scheduler:
     depends_on:
+      - gerritconfig
       - zk
       - mysql
     environment:
-      no_proxy: "${no_proxy}"
-    command: "zuul-scheduler -d"
+      no_proxy: "${no_proxy},gerrit"
+    command: "sh -c 'ansible-playbook /var/playbooks/wait-to-start.yaml; zuul-scheduler -d'"
     image: zuul/zuul-scheduler
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
@@ -39,7 +62,7 @@ services:
   executor:
     privileged: true
     environment:
-      no_proxy: "${no_proxy}"
+      no_proxy: "${no_proxy},gerrit"
     command: "zuul-executor -d"
     depends_on:
       - scheduler
@@ -47,7 +70,7 @@ services:
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
       - "./playbooks/:/var/playbooks/:z"
-      - "~/.ssh/:/var/ssh"
+      - "~/.ssh/:/var/ssh/"
       - "logs:/srv/static/logs:z"
       - "./projects:/projects/"
 
@@ -76,9 +99,5 @@ services:
       - "logs:/usr/local/apache2/htdocs:z"
 
 volumes:
-  sshkey:
-    external: true
-  nodessh:
-    external: true
   logs:
     external: true
