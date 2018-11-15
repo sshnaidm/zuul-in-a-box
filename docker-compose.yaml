@@ -73,9 +73,6 @@ services:
       - "~/.ssh/:/var/ssh/"
       - "logs:/srv/static/logs:z"
       - "./projects:/projects/"
-      - "zuul-state:/var/zuul_state:z"
-      - "zuul-job:/var/zuul_job:z"
-      - "zuul-git:/var/zuul_git:z"
 
   launcher:
     command: "nodepool-launcher -d"
@@ -103,10 +100,4 @@ services:
 
 volumes:
   logs:
-    external: true
-  zuul-state:
-    external: true
-  zuul-job:
-    external: true
-  zuul-git:
     external: true
