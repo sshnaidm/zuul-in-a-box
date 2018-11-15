@@ -21,6 +21,8 @@
     vars:
       ara_report_type: database
       ara_report_path: ara-report
+      zuul_site_mirror_fqdn: "mirror.{{ nodepool.region | lower }}.{{ nodepool.cloud | lower }}.rdoproject.org"
+      zuul_output_dir: "{{ ansible_user_dir }}/zuul-output"
     timeout: 1800
     post-timeout: 1800
     nodeset:
