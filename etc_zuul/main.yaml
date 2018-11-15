@@ -11,6 +11,16 @@
       git.openstack.org:
         untrusted-projects:
           - exclude:
+            - pipeline
+            - job
+            - semaphore
+            - project
+            - project-template
+            - nodeset
+            - secret
+            projects:
+              - openstack-infra/project-config
+          - exclude:
             - project
             projects:
             - openstack-infra/zuul-jobs
