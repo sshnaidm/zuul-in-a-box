@@ -13,6 +13,7 @@
           - exclude:
             - project
             projects:
+            - openstack-infra/openstack-zuul-jobs
             - openstack-infra/tripleo-ci
             - openstack/tripleo-quickstart
             - openstack/tripleo-quickstart-extras
