@@ -1,6 +1,7 @@
 - job:
     name: base
     parent: null
+    abstract: true
     description: |
       The recommended base job.
 
@@ -14,8 +15,13 @@
       - playbooks/base/post-ssh.yaml
       - playbooks/base/post-logs.yaml
     roles:
-      - zuul: zuul-jobs
+      - zuul: openstack-infra/zuul-jobs
+      - zuul: openstack-infra/openstack-zuul-jobs
+    vars:
+      ara_report_type: database
+      ara_report_path: ara-report
     timeout: 1800
+    post-timeout: 1800
     nodeset:
       nodes:
         - name: centos-7
