@@ -1,6 +1,4 @@
-# Version 2 is the latest that is supported by docker-compose in
-# Ubuntu Xenial.
-version: '2'
+version: '3'
 
 services:
   gerrit:
@@ -100,4 +98,3 @@ services:
 
 volumes:
   logs:
-    external: true
