@@ -31,9 +31,6 @@
             - openstack/tripleo-upgrade
             - openstack/browbeat
             - openstack/tripleo-ha-utils
-      projects:
-        untrusted-projects:
-          - trigger
       zuul-ci.org:
         untrusted-projects:
           - zuul-jobs:
