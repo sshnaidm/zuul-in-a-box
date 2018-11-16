@@ -22,9 +22,13 @@
               - openstack-infra/project-config
           - exclude:
             - project
+            - job
+            projects:
+            - openstack-infra/openstack-zuul-jobs
+          - exclude:
+            - project
             projects:
             - openstack-infra/zuul-jobs
-            - openstack-infra/openstack-zuul-jobs
             - openstack-infra/tripleo-ci
             - openstack/tripleo-quickstart
             - openstack/tripleo-quickstart-extras
