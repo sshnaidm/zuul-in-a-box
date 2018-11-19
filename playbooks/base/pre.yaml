@@ -1,6 +1,6 @@
 - hosts: localhost
   roles:
-    - role: emig-job-header
+    - role: emit-job-header
 
 - hosts: all
   roles:
