@@ -1,0 +1,10 @@
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - os_security_group_rule:
+      cloud: rdo-cloud
+      security_group: default
+      protocol: tcp
+      port_range_min: 19885
+      port_range_max: 19885
+      remote_ip_prefix: 0.0.0.0/0
