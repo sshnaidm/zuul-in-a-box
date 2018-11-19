@@ -1,5 +1,12 @@
+- hosts: localhost
+  roles:
+    - role: emig-job-header
+
 - hosts: all
   roles:
     - add-build-sshkey
+    - start-zuul-console
+    - log-inventory
     - prepare-workspace
     - mirror-info
+
