@@ -20,7 +20,7 @@ services:
     depends_on:
       - gerrit
     volumes:
-      - "~/.ssh/:/var/ssh/"
+      - "~/.ssh_copy/:/var/ssh/:z"
       - "./playbooks/:/var/playbooks/:z"
     command: "ansible-playbook /var/playbooks/setup.yaml"
   zk:
@@ -44,9 +44,9 @@ services:
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
       - "./playbooks/:/var/playbooks/:z"
-      - "~/.ssh/:/var/ssh/"
+      - "~/.ssh_copy/:/var/ssh/:z"
       - /var/lib/zuul
-      - "./projects:/projects/"
+      - "./projects:/projects/:z"
   web:
     command: "zuul-web -d"
     depends_on:
@@ -68,9 +68,9 @@ services:
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"
       - "./playbooks/:/var/playbooks/:z"
-      - "~/.ssh/:/var/ssh/"
+      - "~/.ssh_copy/:/var/ssh/:z"
       - "logs:/srv/static/logs:z"
-      - "./projects:/projects/"
+      - "./projects:/projects/:z"
 
   launcher:
     command: "nodepool-launcher -d"
@@ -79,7 +79,7 @@ services:
     image: zuul/nodepool-launcher
     volumes:
       - "./etc_nodepool/:/etc/nodepool/:z"
-      - "~/.config/openstack/:/etc/openstack/"
+      - "~/.config/openstack/:/etc/openstack/:z"
     ports:
       - "8022:8022"
 

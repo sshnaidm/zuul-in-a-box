@@ -1,7 +1,7 @@
 - tenant:
     name: example-tenant
     source:
-      qinqon:
+      sshnaidm:
         config-projects:
           - zuul-in-a-box
       gerrit:
