@@ -22,7 +22,7 @@ services:
     volumes:
       - "~/.ssh_copy/:/var/ssh/:z"
       - "./playbooks/:/var/playbooks/:z"
-    command: "ansible-playbook /var/playbooks/setup.yaml"
+    command: "ansible-playbook /var/playbooks/setup-gerrit.yaml"
   zk:
     image: zookeeper
   mysql:

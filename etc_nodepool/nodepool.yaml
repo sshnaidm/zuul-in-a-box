@@ -22,8 +22,8 @@ providers:
         username: zuul
       - name: fedora-28
         config-drive: true
-        image-name: Fedora-Cloud-Base-28-1.1.x86_64
-        username: centos
+        image-name: openstack-infra-fedora-28
+        username: zuul
     pools:
       - name: main
         max-servers: 5
@@ -33,7 +33,7 @@ providers:
             flavor-name: 'm1.large'
             cloud-image: centos-7
             console-log: true
-            key-name: quiquell
+            key-name: sshnaidm_keys
           - name: fedora-28
             min-ram: 8192
             flavor-name: 'm1.large'
