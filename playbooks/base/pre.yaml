@@ -3,6 +3,7 @@
     - role: emit-job-header
 
 - hosts: all
+  gather_facts: true
   roles:
     - add-build-sshkey
     - start-zuul-console
