@@ -22,7 +22,8 @@
         password: secret
         body: "{{ lookup('file', '/var/ssh/id_rsa.pub') }}"
         status_code: 201
-
+        headers:
+          Content-Type: "application/octet-stream"
     - name: Create temp dir for Gerrit config update
       shell: mktemp -d
       register: gerrit_tmp
