@@ -39,3 +39,6 @@ providers:
             flavor-name: 'm1.large'
             cloud-image: fedora-28
             console-log: true
+
+webapp:
+  port: 8005

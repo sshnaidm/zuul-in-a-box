@@ -82,6 +82,7 @@ services:
       - "~/.config/openstack/:/etc/openstack/:z"
     ports:
       - "8022:8022"
+      - "8005:8005"
 
   logs:
     build:

@@ -5,6 +5,9 @@
       wait_for:
         host: gerrit
         port: 29418
+    - name: Give some time to Gerrit
+      pause:
+        seconds: 10
     # The Gerrit container puts up a helpful info page the first time
     # you hit the web server; get past that.
     - name: Get Gerrit first login screen
