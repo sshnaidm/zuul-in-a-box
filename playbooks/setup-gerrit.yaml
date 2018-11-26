@@ -17,6 +17,11 @@
         user: admin
         password: secret
       ignore_errors: true
+      register: result
+      retries: 10
+      delay: 5
+      until: result.status == 200
+      changed_when: false
     - name: Add admin SSH key to Gerrit
       uri:
         url: http://gerrit:8080/a/accounts/self/sshkeys

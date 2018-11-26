@@ -41,3 +41,11 @@
           - zuul-jobs:
               include:
                 - job
+      rdoproject.org:
+        config-projects:
+          - config
+        untrusted-projects:
+            # Order matters, load common job repos first
+          - rdo-jobs
+            #  shadow: config
+          - ci-config
