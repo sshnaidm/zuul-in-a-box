@@ -45,7 +45,9 @@
         config-projects:
           - config
         untrusted-projects:
-            # Order matters, load common job repos first
-          - rdo-jobs
-            #  shadow: config
-          - ci-config
+          - exclude:
+            - project
+            projects:
+              - rdo-jobs
+              #    shadow: config
+              - ci-config

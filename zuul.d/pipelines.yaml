@@ -7,6 +7,9 @@
       gerrit:
         open: True
         current-patchset: True
+#      rdoproject.org:
+#        open: True
+#        current-patchset: True
     trigger:
       sshnaidm:
         event: ref-updated
