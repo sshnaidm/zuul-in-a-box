@@ -48,6 +48,7 @@
           - exclude:
             - project
             projects:
-              - rdo-jobs
-              #    shadow: config
+              - rdo-jobs:
+                  shadow: config
               - ci-config
+
