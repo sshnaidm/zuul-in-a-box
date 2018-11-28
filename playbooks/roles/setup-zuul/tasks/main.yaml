@@ -28,7 +28,7 @@
     - 22
 
 - name: Start docker
-  become: true
+  #become: true
   service:
     name: docker
     state: started
