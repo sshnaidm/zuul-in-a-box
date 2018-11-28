@@ -39,7 +39,7 @@ services:
       - mysql
     environment:
       no_proxy: "${no_proxy},gerrit"
-    command: "sh -c 'ansible-playbook /var/playbooks/wait-to-start.yaml; zuul-scheduler -d'"
+    command: "sh -c 'ansible-playbook /var/playbooks/wait-gerrit.yaml; zuul-scheduler -d'"
     image: zuul/zuul-scheduler
     volumes:
       - "./etc_zuul/:/etc/zuul/:z"

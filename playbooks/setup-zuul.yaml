@@ -1,33 +1,4 @@
 - hosts: localhost
-  gather_subset: pkg_mgr
   tasks:
-
-  - os_security_group_rule:
-      cloud: rdo-cloud
-      security_group: default
-      protocol: tcp
-      port_range_min: "{{ item }}"
-      port_range_max: "{{ item }}"
-      remote_ip_prefix: 0.0.0.0/0
-    with_items:
-      - 19885
-      - 22
-
-  - name: Start up zuul and friends
-    docker_service:
-      project_src: "{{ playbook_dir }}/../"
-      state: present
-      build: yes
-
-  - name: Wait for zuul
-    uri:
-      url: http://localhost:9000/api/tenant/example-tenant/status
-      method: GET
-      return_content: true
-      status_code: 200
-      body_format: json
-    register: result
-    retries: 60
-    delay: 10
-    until: result.status == 200 and result.json["zuul_version"] is defined
-    changed_when: false
+  - import_role:
+      name: setup-zuul
