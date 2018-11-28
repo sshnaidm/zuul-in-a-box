@@ -41,14 +41,14 @@
           - zuul-jobs:
               include:
                 - job
-      rdoproject.org:
-        config-projects:
-          - config
-        untrusted-projects:
-          - exclude:
-            - project
-            projects:
-              - rdo-jobs:
-                  shadow: config
-              - ci-config
-
+#      rdoproject.org:
+#        config-projects:
+#          - config
+#        untrusted-projects:
+#          - exclude:
+#            - project
+#            projects:
+#              - rdo-jobs:
+#                  shadow: config
+#              - ci-config
+#
