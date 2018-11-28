@@ -3,7 +3,6 @@
     - role: emit-job-header
 
 - hosts: all
-  #gather_facts: true
   roles:
     - validate-host
     - add-build-sshkey

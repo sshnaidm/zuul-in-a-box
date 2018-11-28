@@ -30,3 +30,4 @@
       nodes:
         - name: centos-7
           label: centos-7
+
